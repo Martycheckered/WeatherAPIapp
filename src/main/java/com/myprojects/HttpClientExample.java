@@ -72,7 +72,9 @@ public class HttpClientExample {
 
 
     static  String throwRequest (String input) {
-        StringBuilder resultedCityName= divideBySingleWord(input);
+         LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
+
+        StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
         String result = null;
 
         HttpClientExample obj = new HttpClientExample();
@@ -95,19 +97,7 @@ public class HttpClientExample {
         return result;
 
     }
-    static StringBuilder divideBySingleWord (String cityname) {
-        List <String> longCityNameList = Arrays.asList(cityname.split("\\s"));
-        StringBuilder tempCityName =null;
-        for (int i = 0; i <longCityNameList.size() ; i++) {
-            if(tempCityName == null)
-                tempCityName = new StringBuilder(longCityNameList.get(i) + "+");
-            else
-            { if (i==longCityNameList.size() -1) tempCityName.append(longCityNameList.get(i));
-            else tempCityName.append(longCityNameList.get(i)).append("+");
-            }
-        }
-        return tempCityName;
-    }
+
 
 
 

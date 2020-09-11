@@ -1,66 +1,20 @@
 package com.myprojects;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myprojects.WeatherAPP_POJOs.RequestPOJO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 
 public class FrameDrawing {
+    final static String   TITLE_MESSAGE = "Weather now";
 
     public FrameDrawing () {
         JFrame jframe = getJFrame();
-        JPanel jPanel= new JPanel();
+        JPanel jPanel= getJPanel(jframe);
+
         jframe.add(jPanel);
 
-        Font font = new Font("Arial", Font.BOLD, 15);
-        jPanel.setFont(font);
-        jPanel.add(new JLabel("Enter city name to get actual weather: "));
 
-        JTextField field = new JTextField(20);
-        jPanel.add(field);
-
-        // ImageIcon  wpIcon = new ImageIcon("android_openweathermap.png");
-
-
-        //final ImageIcon icon ;
-
-        final  String   TITLE_message = "Weather now";
-
-        field.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Отображение введенного текста
-                String inputCityName = field.getText();
-                String jsonRequest = HttpClientExample.throwRequest(inputCityName);
-
-                UIManager UI=new UIManager();
-                UI.put("OptionPane.background", Color.LIGHT_GRAY);
-                UI.put("Panel.background", Color.pink);
-                UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
-
-                if (jsonRequest.equals("Incorrect result of API request")) {
-                    JOptionPane.showMessageDialog(jframe,
-                            jsonRequest, TITLE_message, JOptionPane.INFORMATION_MESSAGE);
-                }
-                else {
-                    String parsedJSON = Serialize.parseJSONtoPOJO(jsonRequest);
-                    final ImageIcon icon =
-                            new ImageIcon(("src/main/resources/images/"+Serialize.getIconNameFromJSON(jsonRequest)+".png"));
-
-                    JOptionPane.showMessageDialog(jframe,
-                            parsedJSON, TITLE_message, JOptionPane.INFORMATION_MESSAGE, icon);
-
-                }
-
-
-
-            }
-        });
         jPanel.revalidate();
     }
 
@@ -80,7 +34,48 @@ public class FrameDrawing {
         return jframe;
     }
 
+    static JPanel getJPanel (JFrame jframe) {
+        JPanel jPanel= new JPanel();
+        Font font = new Font("Arial", Font.BOLD, 15);
+        jPanel.setFont(font);
+        jPanel.add(new JLabel("Enter city name to get actual weather: "));
 
+        JTextField field = new JTextField(20);
+        jPanel.add(field);
+
+        field.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Отображение введенного текста
+                String inputCityName = field.getText();
+                String jsonResponce = HttpClientExample.throwRequest(inputCityName);
+
+
+
+                UIManager UI=new UIManager();
+                UI.put("OptionPane.background", Color.LIGHT_GRAY);
+                UI.put("Panel.background", Color.pink);
+                UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
+
+                if (jsonResponce.equals("Incorrect result of API request")) {
+                    JOptionPane.showMessageDialog(jframe,
+                            jsonResponce, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    String parsedJSON = Serialize.parseJSONtoPOJO(jsonResponce);
+                    final ImageIcon icon =
+                            new ImageIcon(("src/main/resources/images/"+Serialize.getIconNameFromJSON(jsonResponce)+".png"));
+
+                    JOptionPane.showMessageDialog(jframe,
+                            parsedJSON, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE, icon);
+
+                }
+
+
+            }
+        });
+
+        return  jPanel;
+    }
 
 
 
