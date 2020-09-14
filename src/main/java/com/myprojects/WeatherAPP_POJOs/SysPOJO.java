@@ -25,8 +25,8 @@ public class SysPOJO {
         this.sunset = sunset;
     }
 
-    public String unixToDate (long unixTime, long timeshift) {
-        long realLocalTime = unixTime+ timeshift;
+    public String unixToDate (long unixTime, long timeShift) {
+        long realLocalTime = unixTime+ timeShift;
         final DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern(" HH:mm:ss");
 

@@ -1,4 +1,4 @@
-package com.myprojects;
+package com.myprojects.WeatherAPP_Singletones;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class LongNameSplitter {
         return instance;
     }
 
-     StringBuilder divideBySingleWord (String cityname) {
+     public StringBuilder divideBySingleWord (String cityname) {
         List<String> longCityNameList = Arrays.asList(cityname.split("\\s"));
         StringBuilder tempCityName =null;
         for (int i = 0; i <longCityNameList.size() ; i++) {

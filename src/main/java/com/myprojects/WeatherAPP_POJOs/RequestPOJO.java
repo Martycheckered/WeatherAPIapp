@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RequestPOJO {
     @JsonProperty("weather")
-   private WeatherPOJO[] weatherPOJO;
+    private WeatherPOJO[] weatherPOJO;
 
-   @JsonProperty("main")
+    @JsonProperty("main")
     private MainPOJO mainPOJO;
 
     @JsonProperty("wind")

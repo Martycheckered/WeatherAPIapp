@@ -47,7 +47,7 @@ public class FrameDrawing {
             public void actionPerformed(ActionEvent e) {
                 // Отображение введенного текста
                 String inputCityName = field.getText();
-                String jsonResponce = HttpClientExample.throwRequest(inputCityName);
+                String jsonResponce = HttpClient.throwRequest(inputCityName);
 
 
 

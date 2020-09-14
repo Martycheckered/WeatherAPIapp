@@ -12,20 +12,20 @@ class FrameDrawingTest {
 
     @Test
     void printJSON () {
-        String jsonStringFromAPI = HttpClientExample.throwRequest("moscow");
+        String jsonStringFromAPI = HttpClient.throwRequest("moscow");
 
         System.out.println(jsonStringFromAPI);
     }
     @Test
     void parseJSONtoNode() throws IOException {
-        String jsonStringFromAPI = HttpClientExample.throwRequest("moscow");
+        String jsonStringFromAPI = HttpClient.throwRequest("moscow");
 
         JsonNode jsonNode = objectMapper.readTree(jsonStringFromAPI);
         JsonNode weather = jsonNode.path("weather");
     }
     @Test
     void parseJSONtoPOJO() throws IOException {
-        String jsonStringFromAPI = HttpClientExample.throwRequest("moscow");
+        String jsonStringFromAPI = HttpClient.throwRequest("moscow");
         System.out.println(jsonStringFromAPI);
         System.out.println(Serialize.parseJSONtoPOJO(jsonStringFromAPI));
     }
@@ -47,7 +47,7 @@ class FrameDrawingTest {
     }*/
   @Test
   void getIcon () {
-      String jsonStringFromAPI = HttpClientExample.throwRequest("miami");
+      String jsonStringFromAPI = HttpClient.throwRequest("miami");
       System.out.println(jsonStringFromAPI);
 
 

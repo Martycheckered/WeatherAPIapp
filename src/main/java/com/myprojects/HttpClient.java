@@ -1,43 +1,65 @@
 package com.myprojects;
 
-import org.apache.http.Header;
+import com.myprojects.WeatherAPP_Singletones.LongNameSplitter;
+import com.myprojects.WeatherAPP_Singletones.PropertyGetter;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class HttpClientExample {
+public class HttpClient{
 
+    static LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
+    static PropertyGetter propertyGetter = PropertyGetter.getInstance();
+
+    final String MY_API_KEY = propertyGetter.getValueFromPropertiesFile("myAPIkey") ;
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
-
-
 
      void close() throws IOException {
         httpClient.close();
     }
 
+    static  String throwRequest (String input) {
+
+        StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
+        String result = null;
+
+        HttpClient obj = new HttpClient();
+
+        try {
+            //System.out.println("Testing 1 - Send Http GET request");
+            try {
+                result = obj.sendGet(resultedCityName.toString());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                obj.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return result;
+
+    }
+
 
     String sendGet(String cityname) throws IOException {
-        final String myAPIkey = "f3c38b99990d434298d683cc28a21320";
+
          String  jsonResult= null;
-        //CloseableHttpClient httpClient = HttpClients.createDefault();
 
 
-            HttpGet request = new HttpGet("https://api.openweathermap.org/data/2.5/weather?q="+cityname+
-                    "&units=metric&appid="+myAPIkey);
+            HttpGet request = new HttpGet(propertyGetter.getValueFromPropertiesFile("API_URI_pt1")
+                    +cityname+
+                    propertyGetter.getValueFromPropertiesFile("API_URI_pt2")
+                    +MY_API_KEY);
 
             // add request headers
            // request.addHeader("custom-key", "mkyong");
@@ -60,7 +82,6 @@ public class HttpClientExample {
                 jsonResult = e.getMessage();
             }
 
-
                 // Get HttpResponse Status
                // System.out.println(response.getProtocolVersion());              // HTTP/1.1
                // System.out.println(response.getStatusLine().getStatusCode());   // 200
@@ -71,32 +92,7 @@ public class HttpClientExample {
     }
 
 
-    static  String throwRequest (String input) {
-         LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
 
-        StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
-        String result = null;
-
-        HttpClientExample obj = new HttpClientExample();
-
-        try {
-            //System.out.println("Testing 1 - Send Http GET request");
-            try {
-                result = obj.sendGet(resultedCityName.toString());
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        } finally {
-            try {
-                obj.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        return result;
-
-    }
 
 
 
