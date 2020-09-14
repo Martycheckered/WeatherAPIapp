@@ -49,8 +49,6 @@ public class FrameDrawing {
                 String inputCityName = field.getText();
                 String jsonResponce = HttpClient.throwRequest(inputCityName);
 
-
-
                 UIManager UI=new UIManager();
                 UI.put("OptionPane.background", Color.LIGHT_GRAY);
                 UI.put("Panel.background", Color.pink);

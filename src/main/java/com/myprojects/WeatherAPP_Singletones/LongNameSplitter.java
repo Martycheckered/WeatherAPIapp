@@ -3,6 +3,7 @@ package com.myprojects.WeatherAPP_Singletones;
 import java.util.Arrays;
 import java.util.List;
 
+// this class is designed to slit city names :  "san francisco" --> "san+francisco"
 public class LongNameSplitter {
     private static LongNameSplitter instance;
 
