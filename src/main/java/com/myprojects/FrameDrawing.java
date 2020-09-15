@@ -43,33 +43,31 @@ public class FrameDrawing {
         JTextField field = new JTextField(20);
         jPanel.add(field);
 
-        field.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Отображение введенного текста
-                String inputCityName = field.getText();
-                String jsonResponce = HttpClient.throwRequest(inputCityName);
+        field.addActionListener(e -> {
+            // Отображение введенного текста
+            String inputCityName = field.getText();
+            String jsonResponce = HttpClient.throwRequest(inputCityName);
 
-                UIManager UI=new UIManager();
-                UI.put("OptionPane.background", Color.LIGHT_GRAY);
-                UI.put("Panel.background", Color.pink);
-                UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
+            UIManager UI=new UIManager();
+            UI.put("OptionPane.background", Color.LIGHT_GRAY);
+            UI.put("Panel.background", Color.pink);
+            UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
 
-                if (jsonResponce.equals("Incorrect result of API request")) {
-                    JOptionPane.showMessageDialog(jframe,
-                            jsonResponce, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
-                }
-                else {
-                    String parsedJSON = Serialize.parseJSONtoPOJO(jsonResponce);
-                    final ImageIcon icon =
-                            new ImageIcon(("src/main/resources/images/"+Serialize.getIconNameFromJSON(jsonResponce)+".png"));
+            if (jsonResponce.equals("Incorrect result of API request")) {
+                JOptionPane.showMessageDialog(jframe,
+                        jsonResponce, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                String parsedJSON = Serialize.parseJSONtoPOJO(jsonResponce);
+                final ImageIcon icon =
+                        new ImageIcon(("src/main/resources/images/"+Serialize.getIconNameFromJSON(jsonResponce)+".png"));
 
-                    JOptionPane.showMessageDialog(jframe,
-                            parsedJSON, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE, icon);
-
-                }
-
+                JOptionPane.showMessageDialog(jframe,
+                        parsedJSON, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE, icon);
 
             }
+
+
         });
 
         return  jPanel;
