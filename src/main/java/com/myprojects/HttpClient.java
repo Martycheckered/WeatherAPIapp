@@ -27,7 +27,7 @@ public class HttpClient{
     static  String throwRequest (String input) {
         LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
         StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
-        String result = null;
+        String result = "";
 
         HttpClient obj = new HttpClient();
 
@@ -36,8 +36,13 @@ public class HttpClient{
             try {
                 result = obj.sendGet(resultedCityName.toString());
             } catch (IOException ex) {
+                result = "У Вас ошибка сети";
+                ex.printStackTrace();
+            } catch (IllegalStateException ex){
+                 result = "Ошибка внешнего ресурса, попробуйте позже.";
                 ex.printStackTrace();
             }
+            
         } finally {
             try {
                 obj.close();
