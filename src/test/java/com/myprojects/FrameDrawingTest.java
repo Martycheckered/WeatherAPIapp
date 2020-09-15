@@ -2,12 +2,13 @@ package com.myprojects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myprojects.WeatherAPP_Singletones.Serializer;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 class FrameDrawingTest {
-    static ObjectMapper objectMapper= Serialize.getDefaultObjectMapper();
+    static ObjectMapper objectMapper= Serializer.getDefaultObjectMapper();
 
 
     @Test
@@ -23,12 +24,12 @@ class FrameDrawingTest {
         JsonNode jsonNode = objectMapper.readTree(jsonStringFromAPI);
         JsonNode weather = jsonNode.path("weather");
     }
-    @Test
+   /* @Test
     void parseJSONtoPOJO() throws IOException {
         String jsonStringFromAPI = HttpClient.throwRequest("moscow");
         System.out.println(jsonStringFromAPI);
-        System.out.println(Serialize.parseJSONtoPOJO(jsonStringFromAPI));
-    }
+        System.out.println(Serializer.parseJSONtoPOJO(jsonStringFromAPI));
+    }*/
   /*  @Test
     void parseJSONtoPOJOvalue() throws IOException {
         String jsonStringFromAPI = HttpClientExample.throwRequest("moscow");
@@ -45,17 +46,17 @@ class FrameDrawingTest {
         String prettyStaff1 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mainPOJO);
         System.out.println(prettyStaff1);
     }*/
-  @Test
+ /* @Test
   void getIcon () {
       String jsonStringFromAPI = HttpClient.throwRequest("miami");
       System.out.println(jsonStringFromAPI);
 
 
-      String iconName =Serialize.getIconNameFromJSON(jsonStringFromAPI);
+      String iconName =Serializer.getIconNameFromJSON(jsonStringFromAPI);
       System.out.println(iconName);
      // String iconName = FrameDrawing.getIconFromParsedJSON ( jsonStringFromAPI) ;
       //System.out.println(iconName);
 
-      }
+      }*/
 
 }

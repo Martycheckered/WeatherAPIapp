@@ -1,9 +1,9 @@
 package com.myprojects;
 
+import com.myprojects.WeatherAPP_Singletones.Serializer;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class FrameDrawing {
     final static String   TITLE_MESSAGE = "Weather now";
@@ -53,14 +53,16 @@ public class FrameDrawing {
             UI.put("Panel.background", Color.pink);
             UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
 
+            Serializer serializer = Serializer.getInstance();
+
             if (jsonResponce.equals("Incorrect result of API request")) {
                 JOptionPane.showMessageDialog(jframe,
                         jsonResponce, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
             }
             else {
-                String parsedJSON = Serialize.parseJSONtoPOJO(jsonResponce);
+                String parsedJSON = serializer.parseJSONtoPOJO(jsonResponce);
                 final ImageIcon icon =
-                        new ImageIcon(("src/main/resources/images/"+Serialize.getIconNameFromJSON(jsonResponce)+".png"));
+                        new ImageIcon(("src/main/resources/images/"+ serializer.getIconNameFromJSON(jsonResponce)+".png"));
 
                 JOptionPane.showMessageDialog(jframe,
                         parsedJSON, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE, icon);

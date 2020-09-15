@@ -13,8 +13,8 @@ import java.io.IOException;
 
 public class HttpClient{
 
-    static LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
-    static PropertyGetter propertyGetter = PropertyGetter.getInstance();
+
+    PropertyGetter propertyGetter = PropertyGetter.getInstance();
 
     final String MY_API_KEY = propertyGetter.getValueFromPropertiesFile("myAPIkey") ;
 
@@ -25,7 +25,7 @@ public class HttpClient{
     }
 
     static  String throwRequest (String input) {
-
+        LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
         StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
         String result = null;
 
