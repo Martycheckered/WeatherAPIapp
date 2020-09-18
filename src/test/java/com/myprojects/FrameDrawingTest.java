@@ -2,7 +2,7 @@ package com.myprojects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myprojects.WeatherAPP_Singletones.Serializer;
+import com.myprojects.Services.Serializer;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

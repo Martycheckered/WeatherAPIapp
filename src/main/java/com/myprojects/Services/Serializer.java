@@ -1,4 +1,4 @@
-package com.myprojects.WeatherAPP_Singletones;
+package com.myprojects.Services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,7 +12,7 @@ public class Serializer {
 
     private static Serializer instance;
 
-    public static synchronized Serializer getInstance() {
+    public static  Serializer getInstance() {
         if (instance == null) {
             instance = new Serializer();
         }

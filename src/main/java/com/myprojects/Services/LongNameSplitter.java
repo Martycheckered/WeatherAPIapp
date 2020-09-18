@@ -1,4 +1,4 @@
-package com.myprojects.WeatherAPP_Singletones;
+package com.myprojects.Services;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,7 @@ public class LongNameSplitter {
         //System.out.println("Singleton created!");
     }
 
-    public static synchronized LongNameSplitter getInstance() {
+    public static  LongNameSplitter getInstance() {
         if (instance == null) {
             instance = new LongNameSplitter();
         }

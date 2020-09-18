@@ -1,4 +1,4 @@
-package com.myprojects.WeatherAPP_Singletones;
+package com.myprojects.Services;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ public class PropertyGetter {
 
     private static PropertyGetter instance;
 
-    public static synchronized PropertyGetter getInstance() {
+    public static  PropertyGetter getInstance() {
         if (instance == null) {
             instance = new PropertyGetter();
         }

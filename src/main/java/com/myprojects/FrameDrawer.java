@@ -1,6 +1,6 @@
 package com.myprojects;
 
-import com.myprojects.WeatherAPP_Singletones.Serializer;
+import com.myprojects.Services.Serializer;
 
 import javax.swing.*;
 import java.awt.*;
