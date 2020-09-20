@@ -11,6 +11,7 @@ public class FrameDrawer extends  JFrame {
     final static String   TITLE_MESSAGE = "Weather now";
      private ImageIcon imageIcon = new ImageIcon("src/main/resources/images/android_openweathermap.png");
       JTextField field = new JTextField(20);
+     public static String iconName;
 
     public FrameDrawer () {
 
@@ -30,21 +31,6 @@ public class FrameDrawer extends  JFrame {
         jPanel.revalidate();
     }
 
-
-   /* FrameDrawer getJFrame () {
-        JFrame jframe = new JFrame();
-        jframe.setVisible(true);
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
-        jframe.setBounds(dimension.width/2-250, dimension.height/2-75, 500,150);
-        jframe.setTitle("Weather APP");
-
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/images/android_openweathermap.png");
-        Image image = imageIcon.getImage();
-        jframe.setIconImage(image);
-        return jframe;
-    }*/
 
      JPanel getJPanel (FrameDrawer frameDrawer) {
         JPanel jPanel= new JPanel();
@@ -68,6 +54,7 @@ public class FrameDrawer extends  JFrame {
          this.frameDrawer = frameDrawer;
      }
 
+
      public void actionPerformed(ActionEvent e) {
          // Отображение введенного текста
          String inputCityName = field.getText();
@@ -85,9 +72,9 @@ public class FrameDrawer extends  JFrame {
                      jsonResponce, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
          }
          else {
-             String parsedJSON = serializer.parseJSONtoPOJO(jsonResponce);
+             String parsedJSON = serializer.parseJSON(jsonResponce);
              final ImageIcon icon =
-                     new ImageIcon(("src/main/resources/images/"+ serializer.getIconNameFromJSON(jsonResponce)+".png"));
+                     new ImageIcon(("src/main/resources/images/"+ iconName+".png"));
 
              JOptionPane.showMessageDialog(frameDrawer,
                      parsedJSON, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE, icon);

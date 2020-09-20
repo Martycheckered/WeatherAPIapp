@@ -58,5 +58,13 @@ class FrameDrawingTest {
       //System.out.println(iconName);
 
       }*/
+   /*@Test
+   void getIconTest () {
+       String jsonStringFromAPI = HttpClient.throwRequest("moscow");
+
+       System.out.println(jsonStringFromAPI);
+       String iconName = Serializer.getInstance().getIconNameFromJSON(jsonStringFromAPI);
+       System.out.println(iconName);
+   }*/
 
 }
