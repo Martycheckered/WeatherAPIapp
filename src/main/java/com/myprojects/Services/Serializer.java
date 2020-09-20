@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myprojects.FrameDrawer;
-import com.myprojects.WeatherAPP_POJOs.RequestPOJO;
+
 
 import java.io.IOException;
 
