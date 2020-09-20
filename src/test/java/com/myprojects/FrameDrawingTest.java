@@ -2,13 +2,13 @@ package com.myprojects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myprojects.Services.Serializer;
+import com.myprojects.Services.Deserializer;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 class FrameDrawingTest {
-    static ObjectMapper objectMapper= Serializer.getDefaultObjectMapper();
+    static ObjectMapper objectMapper= Deserializer.getDefaultObjectMapper();
 
 
     @Test

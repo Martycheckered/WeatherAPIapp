@@ -1,6 +1,7 @@
 package com.myprojects;
 
-import com.myprojects.Services.Serializer;
+import com.myprojects.Services.Deserializer;
+import com.myprojects.Services.WeatherService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,22 +58,26 @@ public class FrameDrawer extends  JFrame {
 
      public void actionPerformed(ActionEvent e) {
          // Отображение введенного текста
-         String inputCityName = field.getText();
-         String jsonResponce = HttpClient.throwRequest(inputCityName);
+
+         //String inputCityName = field.getText();
+         //String jsonResponce = HttpClient.throwRequest(inputCityName);
+         String jsonResponce = WeatherService.getInstance().doJob(field.getText());
 
          UIManager UI = new UIManager();
          UI.put("OptionPane.background", Color.LIGHT_GRAY);
          UI.put("Panel.background", Color.pink);
          UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
 
-         Serializer serializer = Serializer.getInstance();
+         Deserializer deserializer = Deserializer.getInstance();
 
-         if (jsonResponce.equals("Incorrect result of API request")) {
+         if (jsonResponce.equals("Incorrect result of API request") ||
+                 jsonResponce.equals("У Вас ошибка сети") ||
+                 jsonResponce.equals("Ошибка внешнего ресурса, попробуйте позже.")) {
              JOptionPane.showMessageDialog(frameDrawer,
                      jsonResponce, TITLE_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
          }
          else {
-             String parsedJSON = serializer.parseJSON(jsonResponce);
+             String parsedJSON = deserializer.parseJSON(jsonResponce);
              final ImageIcon icon =
                      new ImageIcon(("src/main/resources/images/"+ iconName+".png"));
 

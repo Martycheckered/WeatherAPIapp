@@ -8,14 +8,14 @@ import com.myprojects.FrameDrawer;
 
 import java.io.IOException;
 
-public class Serializer {
+public class Deserializer {
     private static final ObjectMapper objectMapper= getDefaultObjectMapper();
 
-    private static Serializer instance;
+    private static Deserializer instance;
 
-    public static  Serializer getInstance() {
+    public static Deserializer getInstance() {
         if (instance == null) {
-            instance = new Serializer();
+            instance = new Deserializer();
         }
         return instance;
     }
@@ -32,24 +32,11 @@ public class Serializer {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
 
-            //RequestPOJO requestPOJO = objectMapper.treeToValue(jsonNode,RequestPOJO.class);
-           // rp2str = requestPOJO.toString();
-            /*rp2str= getArrayNode(jsonNode,"weather").path("main").asText() +"\n"+
-                    getArrayNode(jsonNode,"weather").path("description").asText()+"\n"+
-                    "Temperature,°C : "+ jsonNode.path("main").path("temp").asDouble()+"\n"+
-                    "Temperature feels like,°C : " + jsonNode.path("main").path("feels_like").asDouble()+"\n"+
-                    "Atmospheric pressure, hPa : " + jsonNode.path("main").path("pressure").asInt()+"\n"+
-                    "Humidity, % : " + jsonNode.path("main").path("humidity").asInt()+ "\n"+
-                    "Wind speed, meter/sec : "+jsonNode.path("wind").path("speed").asInt()+"\n"+
-                    "Cloudiness, % : " +jsonNode.path("clouds").path("all").asInt() +"\n"+
-                    "Sunrise time: " + tztc.unixToDate(jsonNode.path("sys").path("sunrise").asLong(),
-                    jsonNode.path("timezone").asLong()) +"\n"+
-                    "Sunset time: " + tztc.unixToDate(jsonNode.path("sys").path("sunset").asLong(),
-                    jsonNode.path("timezone").asLong());*/
-            FrameDrawer.iconName = this.getArrayNode(jsonNode,"weather").path("icon").asText();
 
-            stringBuilder.append(this.getArrayNode(jsonNode,"weather").path("main").asText()).append(" : ")
-                    .append(this.getArrayNode(jsonNode,"weather").path("description").asText())
+            FrameDrawer.iconName = this.getFirstArrayNode(jsonNode,"weather").path("icon").asText();
+
+            stringBuilder.append(this.getFirstArrayNode(jsonNode,"weather").path("main").asText()).append(" : ")
+                    .append(this.getFirstArrayNode(jsonNode,"weather").path("description").asText())
                     .append("\n")
                     .append("Temperature,°C : ").append(jsonNode.path("main").path("temp").asDouble())
                     .append("\n")
@@ -77,19 +64,9 @@ public class Serializer {
         return stringBuilder.toString();
     }
 
-   /* public String getIconNameFromJSON (String jsonString) {
-        JsonNode jsonNode = null;
-        try {
-            jsonNode = objectMapper.readTree(jsonString);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return
-                this.getArrayNode(jsonNode,"weather").path("icon").asText();
-    }*/
 
-     public JsonNode getArrayNode (JsonNode node, String arrayNodeName) {
+     public JsonNode getFirstArrayNode(JsonNode node, String arrayNodeName) {
         JsonNode arrayNode =node.path (arrayNodeName);
 
         return arrayNode.get(0);

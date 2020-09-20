@@ -24,7 +24,7 @@ public class HttpClient{
         httpClient.close();
     }
 
-    static  String throwRequest (String input) {
+    public static  String throwRequest (String input) {
         LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
         StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
         String result = "";
