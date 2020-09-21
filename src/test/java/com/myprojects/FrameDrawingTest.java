@@ -2,13 +2,13 @@ package com.myprojects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myprojects.WeatherAPP_Singletones.Serializer;
+import com.myprojects.Services.Deserializer;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 class FrameDrawingTest {
-    static ObjectMapper objectMapper= Serializer.getDefaultObjectMapper();
+    static ObjectMapper objectMapper= Deserializer.getDefaultObjectMapper();
 
 
     @Test
@@ -58,5 +58,13 @@ class FrameDrawingTest {
       //System.out.println(iconName);
 
       }*/
+   /*@Test
+   void getIconTest () {
+       String jsonStringFromAPI = HttpClient.throwRequest("moscow");
+
+       System.out.println(jsonStringFromAPI);
+       String iconName = Serializer.getInstance().getIconNameFromJSON(jsonStringFromAPI);
+       System.out.println(iconName);
+   }*/
 
 }

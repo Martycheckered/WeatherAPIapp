@@ -1,7 +1,7 @@
 package com.myprojects;
 
-import com.myprojects.WeatherAPP_Singletones.LongNameSplitter;
-import com.myprojects.WeatherAPP_Singletones.PropertyGetter;
+import com.myprojects.Services.LongNameSplitter;
+import com.myprojects.Services.PropertyGetter;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -24,7 +24,7 @@ public class HttpClient{
         httpClient.close();
     }
 
-    static  String throwRequest (String input) {
+    public static  String throwRequest (String input) {
         LongNameSplitter longNameSplitter = LongNameSplitter.getInstance();
         StringBuilder resultedCityName= longNameSplitter.divideBySingleWord(input);
         String result = "";
